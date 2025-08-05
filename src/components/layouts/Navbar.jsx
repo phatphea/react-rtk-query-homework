@@ -118,6 +118,17 @@ export default function NavbarBasic() {
                   <span>Login</span>
                 </NavLink>
               </li>
+              <li role="none" className="flex items-center">
+                <NavLink
+                  role="menuitem"
+                  aria-current="page"
+                  aria-haspopup="false"
+                  className="flex h-[40px] items-center text-emerald-500 rounded-md py-4 border-2 border-emerald-500 transition-colors duration-300 hover:bg-emerald-600 hover:text-white focus:text-white focus:outline-none focus-visible:outline-none lg:px-7 ml-1"
+                  to="/register"
+                >
+                  <span>Register</span>
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </div>

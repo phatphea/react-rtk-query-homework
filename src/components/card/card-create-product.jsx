@@ -88,7 +88,7 @@ const CardCreateProduct = () => {
             type="text"
             {...register("title")}
             placeholder="Title"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
           {errors.title && (
             <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
@@ -99,7 +99,7 @@ const CardCreateProduct = () => {
             type="number"
             {...register("price", { valueAsNumber: true })}
             placeholder="Price"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
           {errors.price && (
             <p className="text-red-500 text-sm mt-1">{errors.price.message}</p>
@@ -110,7 +110,7 @@ const CardCreateProduct = () => {
             {...register("description")}
             placeholder="Description"
             rows="4"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500 resize-none"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500 resize-none"
           />
           {errors.description && (
             <p className="text-red-500 text-sm mt-1">
@@ -123,7 +123,7 @@ const CardCreateProduct = () => {
             type="number"
             {...register("categoryId", { valueAsNumber: true })}
             placeholder="Category ID"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
           {errors.categoryId && (
             <p className="text-red-500 text-sm mt-1">
@@ -136,7 +136,7 @@ const CardCreateProduct = () => {
             type="text"
             {...register("images")}
             placeholder="Image URL"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
           {errors.images && (
             <p className="text-red-500 text-sm mt-1">{errors.images.message}</p>
@@ -144,7 +144,7 @@ const CardCreateProduct = () => {
         </div>
         <button
           type="submit"
-          className="w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 transition-colors"
+          className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition-colors"
           disabled={isLoading}
         >
           {isLoading ? "Creating..." : "Create Product"}
