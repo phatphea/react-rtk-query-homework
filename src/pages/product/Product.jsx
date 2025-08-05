@@ -9,7 +9,7 @@ export default function Product() {
 
   return (
     <main className="max-w-screen-xl mx-auto">
-      <section className="grid grid-cols-4 gap-5">
+      <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-2">
         {isLoading && array.map((index) => <SkeletonCardProduct key={index} />)}
         {/* product section */}
         {!isLoading &&

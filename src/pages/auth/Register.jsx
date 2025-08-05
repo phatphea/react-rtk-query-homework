@@ -12,6 +12,7 @@ export default function Register() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      
       {/* register your input into the hook by invoking the "register" function */}
       <input defaultValue="test" {...register("example")} />
 
