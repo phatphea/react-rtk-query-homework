@@ -12,6 +12,11 @@ import RootLayout from "./components/layouts/root-layout.jsx";
 import CreateProduct from "./pages/product/CreateProduct.jsx";
 import Register from "./pages/auth/Register.jsx";
 
+// App
+// path="/products" Product
+// path="/products/:id" ProductDetail
+// path="/create-product" CreateProduct 
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
