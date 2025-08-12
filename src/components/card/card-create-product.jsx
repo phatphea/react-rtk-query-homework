@@ -7,10 +7,10 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const schema = z.object({
-  title: z
+  name: z
     .string()
-    .min(1, "Title is required")
-    .max(100, "Title must be 100 characters or less"),
+    .min(1, "Name is required")
+    .max(100, "Name must be 100 characters or less"),
   price: z
     .number()
     .min(0, "Price must be a positive number")
@@ -19,9 +19,6 @@ const schema = z.object({
     .string()
     .min(1, "Description is required")
     .max(500, "Description must be 500 characters or less"),
-  categoryId: z
-    .number()
-    .min(1, "Category ID is required and must be at least 1"),
   images: z.string().url("Must be a valid URL").min(1, "Image URL is required"),
 });
 
@@ -35,10 +32,9 @@ const CardCreateProduct = () => {
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      title: "",
+      name: "",
       price: "",
       description: "",
-      categoryId: "",
       images: "",
     },
   });
@@ -46,21 +42,41 @@ const CardCreateProduct = () => {
   const onSubmit = async (data) => {
     try {
       const payload = {
-        ...data,
-        price: Number(data.price),
-        categoryId: Number(data.categoryId),
-        images: [data.images], // Wrap image URL in an array as expected by the API
+        name: data.name,
+        description: data.description,
+        priceIn: Number(data.price), 
+        priceOut: Number(data.price) * 1.5, 
+        images: [data.images], 
+        thumbnail: data.images,
+        stockQuantity: 100, 
+        computerSpec: {
+          processor: "N/A",
+          ram: "N/A",
+          storage: "N/A",
+          gpu: "N/A",
+          os: "N/A",
+          screenSize: "N/A",
+          battery: "N/A",
+        },
+        color: [
+          {
+            color: "N/A", 
+            images: [data.images],
+          },
+        ],
+        warranty: "5 Days Freshness Guarantee", 
+        availability: true, 
+        categoryUuid: "eb115ca4-a6b2-43f7-aa59-2def7e30dd7b", 
+        supplierUuid: "fd9d42e3-3afc-43a8-8eb4-7cb4c1c9b411", 
+        brandUuid: "8620f990-ef33-495c-b38c-236da90c9b46", 
+        discount: 0, // Default discount
       };
+
       await createProduct(payload).unwrap();
-
-      // Use toast.success for successful creation
       toast.success("Product created successfully!");
-      reset(); // Reset form after success
+      reset();
     } catch (error) {
-      toast.error(errors?.data?.message);
       console.error("Error creating product:", error);
-
-      // Use toast.error to display error messages
       if (error.status) {
         toast.error(
           `Failed to create product. Status: ${error.status}, Message: ${
@@ -77,8 +93,7 @@ const CardCreateProduct = () => {
 
   return (
     <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
-      <ToastContainer position="bottom-right" />{" "}
-      {/* Add the ToastContainer here */}
+      <ToastContainer position="bottom-right" />
       <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
         Create New Product
       </h2>
@@ -86,12 +101,12 @@ const CardCreateProduct = () => {
         <div>
           <input
             type="text"
-            {...register("title")}
-            placeholder="Title"
+            {...register("name")}
+            placeholder="Name"
             className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500"
           />
-          {errors.title && (
-            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+          {errors.name && (
+            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
           )}
         </div>
         <div>
@@ -115,19 +130,6 @@ const CardCreateProduct = () => {
           {errors.description && (
             <p className="text-red-500 text-sm mt-1">
               {errors.description.message}
-            </p>
-          )}
-        </div>
-        <div>
-          <input
-            type="number"
-            {...register("categoryId", { valueAsNumber: true })}
-            placeholder="Category ID"
-            className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-teal-500"
-          />
-          {errors.categoryId && (
-            <p className="text-red-500 text-sm mt-1">
-              {errors.categoryId.message}
             </p>
           )}
         </div>

@@ -11,6 +11,7 @@ import Login from "./pages/auth/Login.jsx";
 import RootLayout from "./components/layouts/root-layout.jsx";
 import CreateProduct from "./pages/product/CreateProduct.jsx";
 import Register from "./pages/auth/Register.jsx";
+import ProductDashboard from "./pages/product/ProductDashboard.jsx";
 
 // App
 // path="/products" Product
@@ -27,6 +28,7 @@ createRoot(document.getElementById("root")).render(
             <Route path="/products" element={<Product />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/create-product" element={<CreateProduct />} />
+            <Route path="/product-dashboard" element={<ProductDashboard/>} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

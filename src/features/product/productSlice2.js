@@ -15,10 +15,10 @@ const productApi = apiSlice.injectEndpoints({
       }),
     }),
     createProduct: build.mutation({
-      query: (newProduct) => ({
+      query: (createProduct) => ({
         url: "/products",
         method: "POST",
-        body: newProduct,
+        body: createProduct,
       }),
     }),
   }),

@@ -96,6 +96,21 @@ export default function NavbarBasic() {
               <li role="none" className="flex items-stretch">
                 <NavLink
                   role="menuitem"
+                  aria-current="page"
+                  aria-haspopup="false"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "flex items-center text-teal-500 gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                      : "flex items-center gap-2 py-4 transition-colors duration-300 hover:text-emerald-500 focus:text-emerald-600 focus:outline-none focus-visible:outline-none lg:px-8"
+                  }
+                  to="/product-dashboard"
+                >
+                  <span>Dashbaord</span>
+                </NavLink>
+              </li>
+              <li role="none" className="flex items-stretch">
+                <NavLink
+                  role="menuitem"
                   aria-haspopup="false"
                   className={({ isActive }) =>
                     isActive

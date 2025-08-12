@@ -39,7 +39,7 @@ export const useLoginWithFacebook = () => {
         throw new Error("Login unsuccessfully");
       }
       const user = res.user;
-      console.log("Github info: ", user);
+      console.log("Facebook info: ", user);
       setIsPending(false);
     } catch (error) {
       setError(error);
