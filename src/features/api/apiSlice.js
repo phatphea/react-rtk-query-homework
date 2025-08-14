@@ -1,5 +1,4 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { he } from "zod/v4/locales";
 import { getDecryptedAccessToken } from "../../utils/tokenUtils";
 
 // custom fetchBaseQuery to handle the base URL

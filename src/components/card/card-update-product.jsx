@@ -22,7 +22,7 @@ const schema = z.object({
   images: z.string().url("Must be a valid URL").min(1, "Image URL is required"),
 });
 
-const CardCreateProduct = () => {
+const CardUpdateProduct = () => {
   const [createProduct, { isLoading }] = useCreateProductMutation();
   const {
     register,
@@ -44,11 +44,11 @@ const CardCreateProduct = () => {
       const payload = {
         name: data.name,
         description: data.description,
-        priceIn: Number(data.price),
-        priceOut: Number(data.price) * 1.5,
-        images: [data.images],
+        priceIn: Number(data.price), 
+        priceOut: Number(data.price) * 1.5, 
+        images: [data.images], 
         thumbnail: data.images,
-        stockQuantity: 100,
+        stockQuantity: 100, 
         computerSpec: {
           processor: "N/A",
           ram: "N/A",
@@ -60,15 +60,15 @@ const CardCreateProduct = () => {
         },
         color: [
           {
-            color: "N/A",
+            color: "N/A", 
             images: [data.images],
           },
         ],
-        warranty: "5 Days Freshness Guarantee",
-        availability: true,
-        categoryUuid: "dc071830-ce8a-40e2-ad51-3c1adeeb02cb",
-        supplierUuid: "0980127a-dc6d-487d-b166-957bcda2540d",
-        brandUuid: "8265f3c7-9aea-498c-88b2-9e1bacb4f716",
+        warranty: "5 Days Freshness Guarantee", 
+        availability: true, 
+        categoryUuid: "eb115ca4-a6b2-43f7-aa59-2def7e30dd7b", 
+        supplierUuid: "fd9d42e3-3afc-43a8-8eb4-7cb4c1c9b411", 
+        brandUuid: "8620f990-ef33-495c-b38c-236da90c9b46", 
         discount: 0, // Default discount
       };
 
@@ -95,7 +95,7 @@ const CardCreateProduct = () => {
     <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
       <ToastContainer position="bottom-right" />
       <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
-        Create New Product
+        Update Product
       </h2>
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
@@ -156,4 +156,4 @@ const CardCreateProduct = () => {
   );
 };
 
-export default CardCreateProduct;
+export default CardUpdateProduct;

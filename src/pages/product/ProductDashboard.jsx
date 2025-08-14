@@ -1,9 +1,24 @@
 import { NavLink } from "react-router";
 import DataTable from "react-data-table-component";
-import { useGetProductsQuery } from "../../features/product/productSlice2";
+import { useDeleteProductMutation, useGetProductsQuery } from "../../features/product/productSlice2";
 
 export default function ProductDashboard() {
   const { data, isLoading } = useGetProductsQuery();
+  const [deleteProduct] = useDeleteProductMutation();
+
+  // handle delete
+   const handleDelete = async (row) => {
+    console.log("The row uuid", row.uuid);
+    try {
+      await deleteProduct({ uuid: row.uuid }).unwrap();
+      toast.success(`${row.name} deleted successfully!`);
+      refetch();
+    } catch (error) {
+      toast.error(`Failed to delete ${row.name}`, error);
+    }
+  };
+
+  // handle edit
 
   const columns = [
     {
@@ -72,17 +87,17 @@ export default function ProductDashboard() {
       cell: (row) => (
         <div className="flex space-x-2">
           <NavLink
-            to={`/edit/${row.id}`}
+            to={`/update-product/${row.uuid}`}
             className="text-sm font-medium text-blue-600 hover:text-blue-900"
           >
             Edit
           </NavLink>
-          <NavLink
-            to={`/delete/${row.id}`}
+          <button
+            onClick={() => handleDelete(row)}
             className="text-sm font-medium text-red-600 hover:text-red-900"
           >
             Delete
-          </NavLink>
+          </button>
         </div>
       ),
     },
