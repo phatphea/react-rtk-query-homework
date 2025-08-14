@@ -3,22 +3,26 @@ import { apiSlice } from "../api/apiSlice";
 const productApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
     getProducts: build.query({
-      query: ({page, size}) => ({
-        url: `/products?page=${page}&size=${size}`,
-        method: "GET"
+      query: () => ({
+        url: "/products",
+        method: "GET",
       }),
       providesTags: (result) =>
         result && result.content
           ? [
-              ...result.content.map(({ uuid }) => ({ type: "Product", id: uuid })),
-              { type: "Product", id: "LIST" }
+              ...result.content.map(({ uuid }) => ({
+                type: "Product",
+                id: uuid,
+              })),
+              { type: "Product", id: "LIST" },
             ]
           : [{ type: "Product", id: "LIST" }],
     }),
+
     getProductById: build.query({
       query: (id) => ({
         url: `/products/${id}`,
-        method: "GET"
+        method: "GET",
       }),
       providesTags: (id) => [{ type: "Product", id }],
     }),
