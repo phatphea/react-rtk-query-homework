@@ -149,7 +149,7 @@ const CardUpdateProduct = () => {
           className="w-full bg-teal-600 text-white py-2 rounded hover:bg-teal-700 transition-colors"
           disabled={isLoading}
         >
-          {isLoading ? "Creating..." : "Create Product"}
+          {isLoading ? "Creating..." : "Update Product"}
         </button>
       </form>
     </div>

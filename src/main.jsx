@@ -26,6 +26,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route element={<RootLayout />}>
             <Route path="/" element={<App />} />
+            {/* <Route path="/" element={<SEO/>}/> */}
             <Route path="/products" element={<Product />} />
             <Route path="/products/:id" element={<ProductDetail />} />
             <Route path="/create-product" element={<CreateProduct />} />

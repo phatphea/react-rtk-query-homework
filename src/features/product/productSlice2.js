@@ -7,16 +7,7 @@ const productApi = apiSlice.injectEndpoints({
         url: "/products",
         method: "GET",
       }),
-      providesTags: (result) =>
-        result && result.content
-          ? [
-              ...result.content.map(({ uuid }) => ({
-                type: "Product",
-                id: uuid,
-              })),
-              { type: "Product", id: "LIST" },
-            ]
-          : [{ type: "Product", id: "LIST" }],
+      
     }),
 
     getProductById: build.query({

@@ -1,24 +1,32 @@
 import { NavLink } from "react-router";
 import DataTable from "react-data-table-component";
-import { useDeleteProductMutation, useGetProductsQuery } from "../../features/product/productSlice2";
+import {
+  useDeleteProductMutation,
+  useGetProductsQuery,
+} from "../../features/product/productSlice2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function ProductDashboard() {
-  const { data, isLoading } = useGetProductsQuery();
+  const { data, isLoading, refetch } = useGetProductsQuery(); // Destructure refetch
   const [deleteProduct] = useDeleteProductMutation();
 
-  // handle delete
-   const handleDelete = async (row) => {
-    console.log("The row uuid", row.uuid);
+  // Handle delete
+  const handleDelete = async (row) => {
+    console.log("The row uuid:", row.uuid);
     try {
-      await deleteProduct({ uuid: row.uuid }).unwrap();
+      await deleteProduct(row.uuid).unwrap(); // Pass UUID directly
       toast.success(`${row.name} deleted successfully!`);
-      refetch();
+      refetch(); // Refresh the product list
     } catch (error) {
-      toast.error(`Failed to delete ${row.name}`, error);
+      console.error("Error deleting product:", error);
+      toast.error(
+        `Failed to delete ${row.name}: ${
+          error?.data?.message || error.message || "Unknown error"
+        }`
+      );
     }
   };
-
-  // handle edit
 
   const columns = [
     {
@@ -105,18 +113,17 @@ export default function ProductDashboard() {
 
   return (
     <main className="max-w-screen-xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
-        <div className="p-6 border-b border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-800">
-            Product Dashboard
-          </h2>
-        </div>
-        <DataTable
-          columns={columns}
-          data={data?.content}
-          pagination
-          progressPending={isLoading}
-          highlightOnHover
-        />
-      </main>
+      <div className="p-6 border-b border-gray-200">
+        <h2 className="text-2xl font-bold text-gray-800">Product Dashboard</h2>
+      </div>
+      <DataTable
+        columns={columns}
+        data={data?.content || []} // Fallback to empty array
+        pagination
+        progressPending={isLoading}
+        highlightOnHover
+      />
+      <ToastContainer position="bottom-right" />
+    </main>
   );
 }
